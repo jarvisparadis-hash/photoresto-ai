@@ -108,46 +108,44 @@
             <h2 class="section-title">Nos Réalisations</h2>
             <p class="section-intro">Découvrez la transformation de souvenirs que nous avons restaurés</p>
             
-            <div class="comparison-container">
-                <div class="comparison-item">
-                    <div class="comparison-label before">Avant</div>
-                    <div class="photo-frame comparison-frame">
-                        <div class="photo-corners"></div>
-                        <img src="images/photo-04.jpg" alt="Photo avant restauration" class="vintage-photo before-photo">
-                        <div class="photo-vignette"></div>
-                    </div>
-                    <p class="comparison-caption">Photo abîmée, couleurs fanées</p>
+            <!-- Slider interactif Avant/Après -->
+            <div class="comparison-slider-container">
+                <div class="comparison-slider">
+                    <!-- Photo abîmée (avant) avec effets -->
+                    <img src="images/photo-04.jpg" alt="Photo avant restauration" class="comparison-slider__image comparison-slider__image--before photo-damaged">
+                    
+                    <!-- Overlay effets abîmé -->
+                    <div class="comparison-slider__overlay"></div>
+                    
+                    <!-- Photo restaurée (après) -->
+                    <img src="images/photo-04.jpg" alt="Photo après restauration" class="comparison-slider__image comparison-slider__image--after photo-restored">
+                    
+                    <!-- Labels -->
+                    <span class="comparison-slider__label comparison-slider__label--before">Avant</span>
+                    <span class="comparison-slider__label comparison-slider__label--after">Après</span>
+                    
+                    <!-- Curseur draggable -->
+                    <div class="comparison-slider__handle"></div>
                 </div>
-                
-                <div class="comparison-arrow">→</div>
-                
-                <div class="comparison-item">
-                    <div class="comparison-label after">Après</div>
-                    <div class="photo-frame comparison-frame">
-                        <div class="photo-corners"></div>
-                        <img src="images/photo-04.jpg" alt="Photo après restauration" class="vintage-photo after-photo">
-                        <div class="photo-vignette"></div>
-                    </div>
-                    <p class="comparison-caption">Restauration complète, couleurs ravivées</p>
-                </div>
+                <p class="comparison-slider-caption">Glissez le curseur pour voir la transformation</p>
             </div>
             
             <div class="comparison-examples">
                 <div class="mini-example">
                     <div class="photo-frame small-frame">
-                        <img src="images/photo-02.jpg" alt="Exemple restauration" class="vintage-photo">
+                        <img src="images/photo-02.jpg" alt="Exemple restauration" class="vintage-photo photo-damaged photo-damaged--light">
                         <div class="photo-vignette"></div>
                     </div>
                 </div>
                 <div class="mini-example">
                     <div class="photo-frame small-frame">
-                        <img src="images/photo-03.jpg" alt="Exemple restauration" class="vintage-photo">
+                        <img src="images/photo-03.jpg" alt="Exemple restauration" class="vintage-photo photo-restored">
                         <div class="photo-vignette"></div>
                     </div>
                 </div>
                 <div class="mini-example">
                     <div class="photo-frame small-frame">
-                        <img src="images/photo-05.jpg" alt="Exemple restauration" class="vintage-photo">
+                        <img src="images/photo-05.jpg" alt="Exemple restauration" class="vintage-photo photo-damaged photo-damaged--heavy">
                         <div class="photo-vignette"></div>
                     </div>
                 </div>

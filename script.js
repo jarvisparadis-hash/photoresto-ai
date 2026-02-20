@@ -1,10 +1,135 @@
 /**
  * PhotoResto AI - Script de commande
- * Gestion du formulaire, tarifs et validation
+ * Gestion du formulaire, tarifs, validation et slider avant/après
  */
 
 (function() {
     'use strict';
+    
+    // ========================================================================
+    // SLIDER AVANT/APRÈS
+    // ========================================================================
+    class ComparisonSlider {
+        constructor(element) {
+            this.slider = element;
+            this.handle = element.querySelector('.comparison-slider__handle');
+            this.afterImage = element.querySelector('.comparison-slider__image--after');
+            this.isDragging = false;
+            this.position = 50;
+            
+            this.init();
+        }
+        
+        init() {
+            // Événements souris
+            this.slider.addEventListener('mousedown', (e) => this.startDrag(e));
+            document.addEventListener('mousemove', (e) => this.drag(e));
+            document.addEventListener('mouseup', () => this.endDrag());
+            
+            // Événements tactiles
+            this.slider.addEventListener('touchstart', (e) => this.startDrag(e), { passive: true });
+            document.addEventListener('touchmove', (e) => this.drag(e), { passive: true });
+            document.addEventListener('touchend', () => this.endDrag());
+            
+            // Clic direct sur le slider
+            this.slider.addEventListener('click', (e) => this.moveToPosition(e));
+            
+            // Clavier pour accessibilité
+            this.slider.setAttribute('tabindex', '0');
+            this.slider.setAttribute('role', 'slider');
+            this.slider.setAttribute('aria-valuemin', '0');
+            this.slider.setAttribute('aria-valuemax', '100');
+            this.slider.setAttribute('aria-valuenow', '50');
+            this.slider.setAttribute('aria-label', 'Comparaison avant/après');
+            
+            this.slider.addEventListener('keydown', (e) => this.handleKeyboard(e));
+            
+            // Position initiale
+            this.updatePosition(50);
+        }
+        
+        startDrag(e) {
+            e.preventDefault();
+            this.isDragging = true;
+            this.slider.style.cursor = 'grabbing';
+        }
+        
+        drag(e) {
+            if (!this.isDragging) return;
+            
+            const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+            const rect = this.slider.getBoundingClientRect();
+            const x = clientX - rect.left;
+            const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+            
+            this.updatePosition(percentage);
+        }
+        
+        endDrag() {
+            this.isDragging = false;
+            this.slider.style.cursor = 'ew-resize';
+        }
+        
+        moveToPosition(e) {
+            if (this.isDragging) return;
+            
+            const rect = this.slider.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+            
+            this.updatePosition(percentage);
+        }
+        
+        handleKeyboard(e) {
+            let newPosition = this.position;
+            
+            switch(e.key) {
+                case 'ArrowLeft':
+                    newPosition = Math.max(0, this.position - 5);
+                    e.preventDefault();
+                    break;
+                case 'ArrowRight':
+                    newPosition = Math.min(100, this.position + 5);
+                    e.preventDefault();
+                    break;
+                case 'Home':
+                    newPosition = 0;
+                    e.preventDefault();
+                    break;
+                case 'End':
+                    newPosition = 100;
+                    e.preventDefault();
+                    break;
+            }
+            
+            this.updatePosition(newPosition);
+        }
+        
+        updatePosition(percentage) {
+            this.position = percentage;
+            
+            // Mettre à jour le clip-path de l'image "après"
+            if (this.afterImage) {
+                this.afterImage.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+            }
+            
+            // Mettre à jour la position du curseur
+            if (this.handle) {
+                this.handle.style.left = `${percentage}%`;
+            }
+            
+            // Mettre à jour aria-valuenow
+            this.slider.setAttribute('aria-valuenow', Math.round(percentage));
+        }
+    }
+    
+    // Initialiser tous les sliders
+    function initComparisonSliders() {
+        const sliders = document.querySelectorAll('.comparison-slider');
+        sliders.forEach(slider => {
+            new ComparisonSlider(slider);
+        });
+    }
     
     // ========================================================================
     // CONFIGURATION
@@ -435,6 +560,7 @@
     // INITIALISATION
     // ========================================================================
     function init() {
+        initComparisonSliders();
         initSelectionHandlers();
         initOptionsHandlers();
         initUploadHandlers();

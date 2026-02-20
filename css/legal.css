@@ -1,0 +1,360 @@
+/* ==================== PAGES LÉGALES ==================== */
+/* Style vintage/rétro cohérent avec le site principal */
+
+.legal-page {
+    min-height: 100vh;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.legal-content {
+    max-width: 800px;
+    width: 100%;
+    background: linear-gradient(135deg, #faf8f5 0%, #f5f0e8 100%);
+    border-radius: 8px;
+    padding: 50px 60px;
+    box-shadow: 
+        0 4px 20px rgba(139, 90, 43, 0.1),
+        inset 0 0 80px rgba(139, 90, 43, 0.03);
+    position: relative;
+}
+
+.legal-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    border-radius: 8px;
+}
+
+/* Titres */
+.legal-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #5c4033;
+    text-align: center;
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+}
+
+.legal-subtitle {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 1.2rem;
+    color: #8b7355;
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+.legal-date {
+    font-size: 0.9rem;
+    color: #a08060;
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #d4c4b0;
+}
+
+/* Sections */
+.legal-section {
+    margin-bottom: 35px;
+}
+
+.legal-section h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #5c4033;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #c4a77d;
+}
+
+.legal-section h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #6b5040;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.legal-section p {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #3d3029;
+    margin-bottom: 12px;
+}
+
+/* Listes */
+.legal-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 15px;
+}
+
+.legal-list li {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #3d3029;
+    padding-left: 25px;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.legal-list li::before {
+    content: '•';
+    position: absolute;
+    left: 8px;
+    color: #8b7355;
+}
+
+/* Tableaux */
+.legal-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.95rem;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.legal-table thead {
+    background: linear-gradient(135deg, #d4c4b0 0%, #c4a77d 100%);
+}
+
+.legal-table th {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    color: #5c4033;
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 1rem;
+}
+
+.legal-table td {
+    font-family: 'Crimson Text', Georgia, serif;
+    padding: 12px 15px;
+    border-bottom: 1px solid #e8dfd0;
+    color: #3d3029;
+    vertical-align: top;
+}
+
+.legal-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.legal-table tbody tr:hover {
+    background: rgba(196, 167, 125, 0.1);
+}
+
+.legal-table.full-width {
+    font-size: 0.9rem;
+}
+
+/* Notes importantes */
+.legal-note {
+    font-size: 0.9rem;
+    color: #7a6a55;
+    font-style: italic;
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(196, 167, 125, 0.15);
+    border-radius: 4px;
+    border-left: 3px solid #c4a77d;
+}
+
+.important-note {
+    font-size: 0.95rem;
+    color: #6b5040;
+    padding: 15px;
+    background: linear-gradient(135deg, #f5ebe0 0%, #ede0d0 100%);
+    border-radius: 6px;
+    border: 1px solid #d4c4b0;
+    margin: 15px 0;
+}
+
+/* Encadrés spéciaux */
+.highlight-box {
+    background: linear-gradient(135deg, #e8dfd0 0%, #dcd0c0 100%);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.highlight-box h3 {
+    margin-top: 0;
+    color: #5c4033;
+}
+
+.intro-section {
+    margin-bottom: 40px;
+}
+
+.intro-quote {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.intro-quote p {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: #6b5040;
+}
+
+/* Grille des droits */
+.rights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.right-item {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #e8dfd0;
+}
+
+.right-item h4 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem;
+    color: #5c4033;
+    margin: 0 0 5px 0;
+}
+
+.right-item p {
+    font-size: 0.95rem;
+    margin: 0;
+    color: #6b5a4a;
+}
+
+/* Grille des engagements */
+.commitment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.commitment-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #e8dfd0;
+}
+
+.commitment-icon {
+    font-size: 1.3rem;
+    color: #8b7355;
+    flex-shrink: 0;
+}
+
+.commitment-item h4 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.05rem;
+    color: #5c4033;
+    margin: 0 0 5px 0;
+}
+
+.commitment-item p {
+    font-size: 0.9rem;
+    margin: 0;
+    color: #6b5a4a;
+    line-height: 1.5;
+}
+
+/* Table des tarifs dans CGV */
+.pricing-table {
+    margin: 20px 0;
+}
+
+/* Liens */
+.legal-content a {
+    color: #8b5a2b;
+    text-decoration: underline;
+    text-decoration-color: #c4a77d;
+    transition: color 0.3s ease;
+}
+
+.legal-content a:hover {
+    color: #6b4020;
+}
+
+/* Navigation */
+.legal-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 40px;
+    padding-top: 25px;
+    border-top: 1px solid #d4c4b0;
+}
+
+.back-link {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 1rem;
+    color: #8b5a2b;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.back-link:hover {
+    color: #5c4033;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .legal-page {
+        padding: 30px 15px;
+    }
+    
+    .legal-content {
+        padding: 30px 25px;
+    }
+    
+    .legal-title {
+        font-size: 1.8rem;
+    }
+    
+    .legal-section h2 {
+        font-size: 1.3rem;
+    }
+    
+    .legal-table {
+        font-size: 0.85rem;
+    }
+    
+    .legal-table th,
+    .legal-table td {
+        padding: 10px 8px;
+    }
+    
+    .legal-navigation {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .rights-grid,
+    .commitment-grid {
+        grid-template-columns: 1fr;
+    }
+}

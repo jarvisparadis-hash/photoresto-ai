@@ -744,7 +744,7 @@ body {
 
 .comparison-slider__image--after {
     z-index: 2;
-    clip-path: inset(0 50% 0 0);
+    clip-path: inset(0 0 0 50%);
 }
 
 .comparison-slider__handle {

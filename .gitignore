@@ -1,0 +1,37 @@
+# Config et credentials - JAMAIS commités
+.env
+.env.*
+*.token
+*.key
+credentials.json
+secrets.json
+
+# Fichiers OpenClaw internes
+.openclaw/
+*.skill
+
+# Dépendances
+node_modules/
+venv/
+__pycache__/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Backups et versions
+backup/
+old/
+*.bak
+*.backup
+v*/

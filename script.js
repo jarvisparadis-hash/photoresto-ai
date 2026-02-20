@@ -132,6 +132,160 @@
     }
     
     // ========================================================================
+    // SLIDER VIDÉO AVANT/APRÈS (Super 8)
+    // ========================================================================
+    class VideoComparisonSlider {
+        constructor(element) {
+            this.slider = element;
+            this.handle = element.querySelector('.video-slider-handle');
+            this.afterLayer = element.querySelector('.video-layer--after');
+            this.beforeVideo = element.querySelector('.video-layer--before video');
+            this.afterVideo = element.querySelector('.video-layer--after video');
+            this.isDragging = false;
+            this.position = 50;
+            
+            this.init();
+        }
+        
+        init() {
+            // Synchroniser les vidéos
+            this.syncVideos();
+            
+            // Événements souris
+            this.slider.addEventListener('mousedown', (e) => this.startDrag(e));
+            document.addEventListener('mousemove', (e) => this.drag(e));
+            document.addEventListener('mouseup', () => this.endDrag());
+            
+            // Événements tactiles
+            this.slider.addEventListener('touchstart', (e) => this.startDrag(e), { passive: true });
+            document.addEventListener('touchmove', (e) => this.drag(e), { passive: true });
+            document.addEventListener('touchend', () => this.endDrag());
+            
+            // Clic direct
+            this.slider.addEventListener('click', (e) => this.moveToPosition(e));
+            
+            // Clavier pour accessibilité
+            this.slider.setAttribute('tabindex', '0');
+            this.slider.setAttribute('role', 'slider');
+            this.slider.setAttribute('aria-valuemin', '0');
+            this.slider.setAttribute('aria-valuemax', '100');
+            this.slider.setAttribute('aria-valuenow', '50');
+            this.slider.setAttribute('aria-label', 'Comparaison vidéo avant/après digitalisation');
+            
+            this.slider.addEventListener('keydown', (e) => this.handleKeyboard(e));
+            
+            // Position initiale
+            this.updatePosition(50);
+        }
+        
+        syncVideos() {
+            if (this.beforeVideo && this.afterVideo) {
+                // Synchroniser la lecture
+                this.beforeVideo.addEventListener('play', () => {
+                    this.afterVideo.play();
+                });
+                
+                this.beforeVideo.addEventListener('pause', () => {
+                    this.afterVideo.pause();
+                });
+                
+                this.beforeVideo.addEventListener('seeked', () => {
+                    this.afterVideo.currentTime = this.beforeVideo.currentTime;
+                });
+                
+                // Synchroniser le temps
+                this.beforeVideo.addEventListener('timeupdate', () => {
+                    if (Math.abs(this.beforeVideo.currentTime - this.afterVideo.currentTime) > 0.1) {
+                        this.afterVideo.currentTime = this.beforeVideo.currentTime;
+                    }
+                });
+            }
+        }
+        
+        startDrag(e) {
+            e.preventDefault();
+            this.isDragging = true;
+            this.slider.style.cursor = 'grabbing';
+        }
+        
+        drag(e) {
+            if (!this.isDragging) return;
+            
+            const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+            const rect = this.slider.getBoundingClientRect();
+            const x = clientX - rect.left;
+            const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+            
+            this.updatePosition(percentage);
+        }
+        
+        endDrag() {
+            this.isDragging = false;
+            this.slider.style.cursor = 'ew-resize';
+        }
+        
+        moveToPosition(e) {
+            if (this.isDragging) return;
+            
+            const rect = this.slider.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+            
+            this.updatePosition(percentage);
+        }
+        
+        handleKeyboard(e) {
+            let newPosition = this.position;
+            
+            switch(e.key) {
+                case 'ArrowLeft':
+                    newPosition = Math.max(0, this.position - 5);
+                    e.preventDefault();
+                    break;
+                case 'ArrowRight':
+                    newPosition = Math.min(100, this.position + 5);
+                    e.preventDefault();
+                    break;
+                case 'Home':
+                    newPosition = 0;
+                    e.preventDefault();
+                    break;
+                case 'End':
+                    newPosition = 100;
+                    e.preventDefault();
+                    break;
+            }
+            
+            this.updatePosition(newPosition);
+        }
+        
+        updatePosition(percentage) {
+            this.position = percentage;
+            
+            // Mettre à jour le clip-path de la couche "après"
+            if (this.afterLayer) {
+                this.afterLayer.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+            }
+            
+            // Mettre à jour la position du curseur
+            if (this.handle) {
+                this.handle.style.left = `${percentage}%`;
+            }
+            
+            // Mettre à jour aria-valuenow
+            this.slider.setAttribute('aria-valuenow', Math.round(percentage));
+        }
+    }
+    
+    // Initialiser tous les sliders vidéo
+    function initVideoComparisonSliders() {
+        const sliders = document.querySelectorAll('.video-comparison-slider');
+        sliders.forEach(slider => {
+            new VideoComparisonSlider(slider);
+        });
+    }
+    
+    // ========================================================================
     // CONFIGURATION
     // ========================================================================
     const CONFIG = {

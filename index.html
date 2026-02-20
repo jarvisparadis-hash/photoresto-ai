@@ -103,6 +103,153 @@
             </div>
         </section>
         
+        <!-- ==================== DÉMO SUPER 8 ==================== -->
+        <section class="demo-section demo-super8" id="demo-super8">
+            <h2 class="section-title">Digitalisation Super 8</h2>
+            <p class="section-intro">Redonnez vie à vos films Super 8 et 8mm avec notre technologie de pointe</p>
+            
+            <div class="demo-container">
+                <div class="demo-video-wrapper">
+                    <!-- Slider vidéo Super 8 -->
+                    <div class="video-comparison-slider" data-type="video">
+                        <!-- Vidéo "avant" avec effets Super 8 vintage -->
+                        <div class="video-layer video-layer--before">
+                            <video autoplay loop muted playsinline class="demo-video super8-vintage">
+                                <source src="videos/super8-demo.mp4" type="video/mp4">
+                            </video>
+                            <div class="super8-effects">
+                                <div class="film-grain"></div>
+                                <div class="film-scratches"></div>
+                                <div class="film-vignette"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Vidéo "après" nette -->
+                        <div class="video-layer video-layer--after">
+                            <video autoplay loop muted playsinline class="demo-video super8-restored">
+                                <source src="videos/super8-demo.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        
+                        <!-- Labels -->
+                        <span class="comparison-slider__label comparison-slider__label--before">Film original</span>
+                        <span class="comparison-slider__label comparison-slider__label--after">Digitalisé HD</span>
+                        
+                        <!-- Curseur -->
+                        <div class="video-slider-handle"></div>
+                    </div>
+                    <p class="demo-caption">Glissez le curseur pour comparer le film original et sa version digitalisée</p>
+                </div>
+                
+                <div class="demo-features">
+                    <h3 class="demo-features-title">Notre processus de digitalisation</h3>
+                    <ul class="demo-features-list">
+                        <li>
+                            <span class="feature-icon">🎬</span>
+                            <div class="feature-content">
+                                <strong>Capture frame par frame</strong>
+                                <p>Chaque image est capturée individuellement pour une qualité optimale</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✨</span>
+                            <div class="feature-content">
+                                <strong>Stabilisation automatique</strong>
+                                <p>Correction des tremblements et des saccades du film original</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="feature-icon">🎨</span>
+                            <div class="feature-content">
+                                <strong>Restauration des couleurs</strong>
+                                <p>Correction automatique de la colorimétrie et du contraste</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="feature-icon">💾</span>
+                            <div class="feature-content">
+                                <strong>Formats modernes</strong>
+                                <p>Livraison en MP4, MOV ou AVI - compatible tous appareils</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ==================== DÉMO UPSCALING ==================== -->
+        <section class="demo-section demo-upscaling" id="demo-upscaling">
+            <h2 class="section-title">Upscaling HD/4K</h2>
+            <p class="section-intro">Agrandissez vos photos jusqu'à 4x leur taille originale grâce à l'intelligence artificielle</p>
+            
+            <div class="demo-container demo-upscaling-container">
+                <div class="upscaling-comparison">
+                    <!-- Image "avant" floue -->
+                    <div class="upscaling-item upscaling-item--before">
+                        <div class="upscaling-frame">
+                            <img src="images/photo-02.jpg" alt="Image basse résolution" class="upscaling-image upscaling-blur">
+                            <div class="pixel-overlay"></div>
+                        </div>
+                        <span class="upscaling-label">480p</span>
+                        <p class="upscaling-desc">Image d'origine<br><em>Floue, pixelisée</em></p>
+                    </div>
+                    
+                    <!-- Flèche -->
+                    <div class="upscaling-arrow">
+                        <span>→</span>
+                        <small>Upscaling IA</small>
+                    </div>
+                    
+                    <!-- Image "après" nette -->
+                    <div class="upscaling-item upscaling-item--after">
+                        <div class="upscaling-frame">
+                            <img src="images/photo-02.jpg" alt="Image haute résolution" class="upscaling-image upscaling-hd">
+                        </div>
+                        <span class="upscaling-label upscaling-label--hd">4K</span>
+                        <p class="upscaling-desc">Image restaurée<br><em>Nette, détaillée</em></p>
+                    </div>
+                </div>
+                
+                <!-- Zone de zoom -->
+                <div class="zoom-comparison">
+                    <h4 class="zoom-title">Zoom x4 sur une zone de détail</h4>
+                    <div class="zoom-containers">
+                        <div class="zoom-item">
+                            <div class="zoom-frame zoom-frame--blur">
+                                <div class="zoom-content">
+                                    <img src="images/photo-02.jpg" alt="Zoom basse résolution" class="zoom-image">
+                                </div>
+                            </div>
+                            <span class="zoom-label">Sans upscaling</span>
+                        </div>
+                        <div class="zoom-item">
+                            <div class="zoom-frame zoom-frame--sharp">
+                                <div class="zoom-content">
+                                    <img src="images/photo-02.jpg" alt="Zoom haute résolution" class="zoom-image">
+                                </div>
+                            </div>
+                            <span class="zoom-label">Avec upscaling IA</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="upscaling-stats">
+                    <div class="stat-item">
+                        <span class="stat-value">4x</span>
+                        <span class="stat-label">Agrandissement</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">+300%</span>
+                        <span class="stat-label">Détails restaurés</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">HD/4K</span>
+                        <span class="stat-label">Résolution finale</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
         <!-- ==================== AVANT / APRÈS ==================== -->
         <section class="before-after" id="realisations">
             <h2 class="section-title">Nos Réalisations</h2>

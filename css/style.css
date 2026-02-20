@@ -2079,6 +2079,552 @@ body {
 }
 
 /* ==========================================================================
+   DÉMO SECTIONS - Super 8 & Upscaling
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   SECTION DÉMO GÉNÉRIQUE
+   -------------------------------------------------------------------------- */
+.demo-section {
+    margin-bottom: var(--space-2xl);
+    padding: var(--space-xl) 0;
+}
+
+.demo-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.demo-caption {
+    font-family: var(--font-accent);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-top: var(--space-md);
+}
+
+/* --------------------------------------------------------------------------
+   DÉMO SUPER 8
+   -------------------------------------------------------------------------- */
+.demo-super8 {
+    background: linear-gradient(
+        180deg,
+        rgba(45, 33, 24, 0.03) 0%,
+        transparent 50%,
+        rgba(45, 33, 24, 0.03) 100%
+    );
+}
+
+.demo-super8 .demo-container {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: var(--space-xl);
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .demo-super8 .demo-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.demo-video-wrapper {
+    position: relative;
+}
+
+/* Slider vidéo */
+.video-comparison-slider {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xl);
+    cursor: ew-resize;
+    user-select: none;
+    background: #000;
+}
+
+.video-layer {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.video-layer--before {
+    z-index: 1;
+}
+
+.video-layer--after {
+    z-index: 2;
+    clip-path: inset(0 50% 0 0);
+}
+
+.demo-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Effets Super 8 vintage */
+.super8-vintage {
+    filter: 
+        sepia(0.35)
+        contrast(0.9)
+        brightness(0.95)
+        saturate(0.7);
+}
+
+.super8-effects {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.film-grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    animation: grain-animation 0.5s steps(10) infinite;
+}
+
+@keyframes grain-animation {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-2%, -2%); }
+    20% { transform: translate(2%, 2%); }
+    30% { transform: translate(-1%, 2%); }
+    40% { transform: translate(2%, -1%); }
+    50% { transform: translate(-2%, 1%); }
+    60% { transform: translate(1%, -2%); }
+    70% { transform: translate(-1%, -1%); }
+    80% { transform: translate(2%, 1%); }
+    90% { transform: translate(-2%, 2%); }
+}
+
+.film-scratches {
+    position: absolute;
+    inset: 0;
+    opacity: 0.15;
+    background: 
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 3px,
+            rgba(255, 255, 255, 0.3) 3px,
+            rgba(255, 255, 255, 0.3) 4px
+        );
+    animation: scratch-animation 8s linear infinite;
+}
+
+@keyframes scratch-animation {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(20px); }
+}
+
+.film-vignette {
+    position: absolute;
+    inset: 0;
+    box-shadow: 
+        inset 0 0 100px rgba(0, 0, 0, 0.5),
+        inset 0 0 50px rgba(0, 0, 0, 0.3);
+    border-radius: var(--radius-md);
+}
+
+/* Curseur vidéo */
+.video-slider-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    background: var(--gold-medium);
+    z-index: 10;
+    transform: translateX(-50%);
+    cursor: ew-resize;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.video-slider-handle::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background: var(--gold-medium);
+    border-radius: 50%;
+    box-shadow: 
+        0 2px 15px rgba(0, 0, 0, 0.4),
+        inset 0 2px 0 rgba(255, 255, 255, 0.3);
+}
+
+.video-slider-handle::after {
+    content: '◀ ▶';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.7rem;
+    color: white;
+    letter-spacing: 2px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+}
+
+/* Features panel */
+.demo-features {
+    background: linear-gradient(
+        180deg,
+        var(--cream-pure) 0%,
+        var(--cream-warm) 100%
+    );
+    padding: var(--space-xl);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--sepia-soft);
+}
+
+.demo-features-title {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: var(--leather-dark);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+}
+
+.demo-features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.demo-features-list li {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid rgba(212, 196, 168, 0.4);
+}
+
+.demo-features-list li:last-child {
+    border-bottom: none;
+}
+
+.feature-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.feature-content strong {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    color: var(--leather-dark);
+    margin-bottom: 0.25rem;
+}
+
+.feature-content p {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   DÉMO UPSCALING
+   -------------------------------------------------------------------------- */
+.demo-upscaling {
+    background: var(--cream-warm);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+}
+
+.demo-upscaling-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+/* Comparaison upscaling */
+.upscaling-comparison {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+}
+
+.upscaling-item {
+    text-align: center;
+}
+
+.upscaling-frame {
+    position: relative;
+    width: 280px;
+    height: 200px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    background: var(--cream-dark);
+}
+
+.upscaling-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Effet flou/pixelisé */
+.upscaling-blur {
+    filter: 
+        blur(2px)
+        contrast(0.9)
+        saturate(0.8);
+    transform: scale(1.1);
+}
+
+.pixel-overlay {
+    position: absolute;
+    inset: 0;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 3px,
+            rgba(0, 0, 0, 0.03) 3px,
+            rgba(0, 0, 0, 0.03) 4px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 3px,
+            rgba(0, 0, 0, 0.03) 3px,
+            rgba(0, 0, 0, 0.03) 4px
+        );
+    pointer-events: none;
+}
+
+/* Image HD */
+.upscaling-hd {
+    filter: 
+        contrast(1.05)
+        saturate(1.05)
+        sharpen(1);
+}
+
+/* Labels */
+.upscaling-label {
+    display: inline-block;
+    margin-top: var(--space-sm);
+    padding: 0.4rem 1rem;
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 600;
+    background: rgba(107, 91, 79, 0.2);
+    color: var(--leather-medium);
+    border-radius: var(--radius-sm);
+}
+
+.upscaling-label--hd {
+    background: linear-gradient(135deg, var(--gold-medium), var(--gold-dark));
+    color: white;
+}
+
+.upscaling-desc {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+}
+
+.upscaling-desc em {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Flèche */
+.upscaling-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.upscaling-arrow span {
+    font-size: 2.5rem;
+    color: var(--gold-medium);
+}
+
+.upscaling-arrow small {
+    font-family: var(--font-accent);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Zoom comparison */
+.zoom-comparison {
+    background: var(--cream-pure);
+    padding: var(--space-xl);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+}
+
+.zoom-title {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: var(--leather-dark);
+    text-align: center;
+    margin-bottom: var(--space-lg);
+}
+
+.zoom-containers {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+}
+
+.zoom-item {
+    text-align: center;
+}
+
+.zoom-frame {
+    width: 180px;
+    height: 180px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+}
+
+.zoom-content {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.zoom-image {
+    width: 400%;
+    height: 400%;
+    object-fit: cover;
+    object-position: 30% 40%;
+    transform: translate(-25%, -15%);
+}
+
+.zoom-frame--blur .zoom-image {
+    filter: blur(3px) contrast(0.85);
+    image-rendering: pixelated;
+}
+
+.zoom-frame--sharp .zoom-image {
+    filter: contrast(1.1) saturate(1.05);
+    image-rendering: auto;
+}
+
+.zoom-label {
+    display: block;
+    margin-top: var(--space-sm);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Stats */
+.upscaling-stats {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+    padding: var(--space-lg);
+    background: linear-gradient(135deg, var(--leather-dark), var(--leather-medium));
+    border-radius: var(--radius-md);
+}
+
+.stat-item {
+    text-align: center;
+    color: var(--cream-pure);
+}
+
+.stat-value {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--gold-light);
+}
+
+.stat-label {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE DÉMOS
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    .demo-super8 .demo-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .demo-features {
+        order: -1;
+    }
+    
+    .upscaling-frame {
+        width: 220px;
+        height: 160px;
+    }
+    
+    .upscaling-arrow {
+        transform: rotate(90deg);
+    }
+    
+    .zoom-frame {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .stat-value {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .upscaling-comparison {
+        flex-direction: column;
+    }
+    
+    .upscaling-arrow {
+        transform: none;
+    }
+    
+    .upscaling-frame {
+        width: 100%;
+        max-width: 280px;
+        height: 180px;
+    }
+    
+    .zoom-containers {
+        gap: var(--space-lg);
+    }
+    
+    .upscaling-stats {
+        gap: var(--space-lg);
+    }
+    
+    .stat-item {
+        min-width: 80px;
+    }
+}
+
+/* ==========================================================================
    TARIFS, PACKS, FORMULAIRE - Styles Premium
    ========================================================================== */
 
